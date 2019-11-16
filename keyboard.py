@@ -24,7 +24,7 @@ class Keyboard():
     def __init__(self, gamedisplay, list_active_buttons=None):
         if list_active_buttons is None:
             self.list_active_buttons = ['+', '/', '*', '-', '7', '4', '1', '.',
-                                        '8', '5', '2', '0', '9', '6', '3', '=']
+                                        '8', '5', '2', '0', '9', '6', '3', '=','(',')']
         else:
             self.list_active_buttons = list_active_buttons
     
@@ -32,6 +32,11 @@ class Keyboard():
         self.calculator_display_rect = pygame.Rect(0, 0, 600, 150)
         self.calculator_display_color = (0, 0, 0)
         self.gamedisplay = gamedisplay
+
+        self.rectangle_alvo = pygame.Rect(0, 410, 200, 190)
+        self.rectangle_resp = pygame.Rect(160, 410, 200, 190)
+        self.rectangle_numjog = pygame.Rect(360, 410, 250, 190)
+
     def _create_buttons(self):
         '''Cria os botões do teclado e define se eles aparecem ou não
            de acordo com os valores passados em list_active_buttons'''
@@ -124,14 +129,31 @@ class Keyboard():
         keyboard_buttons.append(pygbutton.PygButton((GRID_WIDTH_BUTTON_C,
                                                      GRID_HEIGHT_MIN,
                                                      WIDTH_BUTTONS,
-                                                     HEIGHT_BUTTON_C),
+                                                     120),
                                                     'C'))
+
+        keyboard_buttons.append(pygbutton.PygButton((GRID_WIDTH_BUTTON_C,
+                                                     GRID_HEIGHT_MIN+ 125 ,
+                                                     100,
+                                                     50),
+                                                    '('))
+
+        keyboard_buttons.append(pygbutton.PygButton((GRID_WIDTH_BUTTON_C,
+                                                     GRID_HEIGHT_MIN + 180,
+                                                     100,
+                                                     50),
+                                                    ')'))
 
         for button in keyboard_buttons:
             if button.caption in self.list_active_buttons or button.caption in ['C', '=']:
                 button.visible = True
+                button.fgcolor = (0,255,0)
+
             else:
+                button.fgcolor = (255,0,0)
                 button.visible = False
+
+
 
         return keyboard_buttons
 
@@ -142,7 +164,9 @@ class Keyboard():
                          self.calculator_display_rect)
         for button in self.buttons:
             button.draw(self.gamedisplay)
-
+        pygame.draw.rect(self.gamedisplay,(255,0,0),self.rectangle_alvo)
+        pygame.draw.rect(self.gamedisplay,(255,255,0),self.rectangle_resp)
+        pygame.draw.rect(self.gamedisplay,(255,0,255),self.rectangle_numjog)
     def use_keyboard(self, event):
         """Checa se algum botão foi pressionado"""
         for button in self.buttons:

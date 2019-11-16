@@ -4,6 +4,7 @@ import pygbutton
 import scene
 import time
 
+# x,y(410,0,width=500,height=190)
 
 
 def main():
@@ -16,7 +17,7 @@ def main():
     game_display.fill(pygbutton.WHITE)
     # Define o nome da janela
     pygame.display.set_caption("Math Game")
-    cena1 = scene.Scene(game_display, 10, ['1', '9', '+'])
+    cena1 = scene.Scene(game_display, 10, ['1', '9', '+','(',')'])
     cena2 = scene.Scene(game_display, 100, ['1', '0', '5', '2', '*', '+'])
     cena3 = scene.Scene(game_display, 40, ['2', '*', '0'])
     cenas = []
@@ -34,19 +35,18 @@ def main():
                 pygame.quit()
                 quit()
             if event.type in (pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP):
+                resultado = cenas[fase].handle_events(event)
+                print(resultado)
                 proxima_fase += cenas[fase].handle_events(event)
 
 
         if proxima_fase > fase:
-            cenas[proxima_fase].display_text.clear()
-            cenas[proxima_fase].display_text = []
             fase = proxima_fase
 
         # Preenche a tela de branco
         game_display.fill(pygbutton.WHITE)
         cenas[fase].build_scene()
         cenas[fase].write_calculator()
-
         # Atualiza a tela
         pygame.display.flip()
 main()
