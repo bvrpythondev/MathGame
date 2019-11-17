@@ -50,25 +50,26 @@ class Scene():
                     self.result_text = True
                     self.game_display.blit(self.correto,self.calculator.rectangle_resp)
                     pygame.display.flip()
-                    time.sleep(1.5)
+                    time.sleep(1)
                     return 1
                 else:
                     self.result_text = False
                     self.game_display.blit(self.incorreto, self.calculator.rectangle_resp)
                     pygame.display.flip()
-                    time.sleep(1.5)
+                    time.sleep(1)
                     return 0
             else:
                 self.display_text.append(button_pressed)
                 self.numjog -= 1
                 self.numjogp = self.font2.render(str(self.numjog), True, (0, 0, 0))
                 self.game_display.blit(self.numjogp, self.calculator.rectangle_numjog)
-                time.sleep(0.25)
                 pygame.display.flip()
-                if self.numjog < 0:
+                if self.numjog <= 0:
                     print(self.numjog)
                     self.display_text.clear()
-                    self.game_display.blit(self.perdeu, self.calculator.rectangle_numjog)
+                    self.game_display.blit(self.perdeu, self.calculator.rectangle_resp)
+                    pygame.display.flip()
+                    time.sleep(0.55)
                     self.numjog = self.numjogi
                     return 0
                 return 0
