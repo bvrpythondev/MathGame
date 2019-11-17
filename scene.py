@@ -7,7 +7,7 @@ import information
 class Scene():
     """Classe que define e cria métodos para a tela do jogo"""
 
-    def __init__(self, game_display, alvo, teclas=None):
+    def __init__(self, game_display, alvo, numjog, teclas=None):
         self.game_display = game_display
         if teclas is None:
             self.teclas = ['+', '/', '*', '-', '7', '4', '1', '.',
@@ -17,18 +17,22 @@ class Scene():
         self.calculator = keyboard.Keyboard(self.game_display, self.teclas)
         self.alvo = alvo
         self.font = pygame.font.SysFont('helvetica', 50)
-        self.font2 = pygame.font.SysFont('helvetica', 35)
+        self.font2 = pygame.font.SysFont('helvetica', 31)
+        self.numjog = numjog
+        self.numjogi= numjog
         self.display_text = []
         self.result_text = False
         self.correto = self.font2.render("Correto",True,(0,0,0))
-        self.incorreto = self.font2.render("Correto",True,(0,0,0))
+        self.incorreto = self.font2.render("Incorreto",True,(0,0,0))
+        self.perdeu = self.font2.render("Perdeu",True,(0,0,0))
 
     def build_scene(self):
         "Desenha a fase"
         self.calculator.draw_keyboard()
         alvo =self.font2.render(str('Alvo = '+str(self.alvo)),True,(255,255,255))
         self.game_display.blit(alvo,(10,430))
-
+        self.numjogp = self.font2.render(str(self.numjog), True, (0, 0, 0))
+        self.game_display.blit(self.numjogp, self.calculator.rectangle_numjog)
 
     def handle_events(self, event):
         """Cuida dos eventos da fase"""
@@ -37,18 +41,36 @@ class Scene():
             if button_pressed == 'C':
                 print(self.display_text)
                 self.display_text.clear()
+                self.numjog = self.numjogi
             elif button_pressed == '=':
                 # Avalia valor
                 valor = self.evaluate()
                 self.display_text.clear()
                 if valor == self.alvo:
                     self.result_text = True
-                    return [1,'Correto']
+                    self.game_display.blit(self.correto,self.calculator.rectangle_resp)
+                    pygame.display.flip()
+                    time.sleep(1.5)
+                    return 1
                 else:
                     self.result_text = False
-                    return [0,'Incorreto']
+                    self.game_display.blit(self.incorreto, self.calculator.rectangle_resp)
+                    pygame.display.flip()
+                    time.sleep(1.5)
+                    return 0
             else:
                 self.display_text.append(button_pressed)
+                self.numjog -= 1
+                self.numjogp = self.font2.render(str(self.numjog), True, (0, 0, 0))
+                self.game_display.blit(self.numjogp, self.calculator.rectangle_numjog)
+                time.sleep(0.25)
+                pygame.display.flip()
+                if self.numjog < 0:
+                    print(self.numjog)
+                    self.display_text.clear()
+                    self.game_display.blit(self.perdeu, self.calculator.rectangle_numjog)
+                    self.numjog = self.numjogi
+                    return 0
                 return 0
         return 0
 
