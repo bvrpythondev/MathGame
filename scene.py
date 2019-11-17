@@ -63,7 +63,7 @@ class Scene():
                 self.numjog -= 1
                 self.numjogp = self.font2.render(str(self.numjog), True, (0, 0, 0))
                 self.game_display.blit(self.numjogp, self.calculator.rectangle_numjog)
-                
+
                 pygame.display.flip()
                 if self.numjog <= 0:
                     print(self.numjog)
