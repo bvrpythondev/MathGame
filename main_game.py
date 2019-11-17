@@ -3,6 +3,7 @@ import pygame
 import pygbutton
 import scene
 import time
+import endgame
 
 # x,y(410,0,width=500,height=190)
 
@@ -24,7 +25,7 @@ def main():
     cenas.append(cena1)
     cenas.append(cena2)
     cenas.append(cena3)
-
+    gamewin = endgame.GameWin(game_display)
     # loop principal do game
     fase = 0
     proxima_fase = 0
@@ -35,7 +36,6 @@ def main():
                 pygame.quit()
                 quit()
             if event.type in (pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP):
-
                 proxima_fase += cenas[fase].handle_events(event)
 
 
@@ -45,9 +45,12 @@ def main():
             fase = proxima_fase
 
         # Preenche a tela de branco
-        game_display.fill(pygbutton.WHITE)
-        cenas[fase].build_scene()
-        cenas[fase].write_calculator()
+        try:
+            game_display.fill(pygbutton.WHITE)
+            cenas[fase].build_scene()
+            cenas[fase].write_calculator()
+        except:
+            gamewin.gamewin()
         # Atualiza a tela
         pygame.display.flip()
 main()

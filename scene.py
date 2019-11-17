@@ -2,7 +2,7 @@
 import pygame
 import time
 import keyboard
-import information
+import endgame
 
 class Scene():
     """Classe que define e cria métodos para a tela do jogo"""
@@ -17,7 +17,7 @@ class Scene():
         self.calculator = keyboard.Keyboard(self.game_display, self.teclas)
         self.alvo = alvo
         self.font = pygame.font.SysFont('helvetica', 50)
-        self.font2 = pygame.font.SysFont('helvetica', 31)
+        self.font2 = pygame.font.SysFont('helvetica', 30)
         self.numjog = numjog
         self.numjogi= numjog
         self.display_text = []
@@ -26,12 +26,15 @@ class Scene():
         self.incorreto = self.font2.render("Incorreto",True,(0,0,0))
         self.perdeu = self.font2.render("Perdeu",True,(0,0,0))
 
+    def gamewin(self):
+        self.game_display.fill((255,255,255))
+        pygame.display.flip()
     def build_scene(self):
         "Desenha a fase"
         self.calculator.draw_keyboard()
         alvo =self.font2.render(str('Alvo = '+str(self.alvo)),True,(255,255,255))
         self.game_display.blit(alvo,(10,430))
-        self.numjogp = self.font2.render(str(self.numjog), True, (0, 0, 0))
+        self.numjogp = self.font2.render(str("Número clicks = " + str(self.numjog)), True, (0, 0, 0))
         self.game_display.blit(self.numjogp, self.calculator.rectangle_numjog)
 
     def handle_events(self, event):
@@ -61,13 +64,14 @@ class Scene():
             else:
                 self.display_text.append(button_pressed)
                 self.numjog -= 1
-                self.numjogp = self.font2.render(str(self.numjog), True, (0, 0, 0))
+                self.numjogp = self.font2.render("Número jogadas"+str(self.numjog), True, (0, 0, 0))
                 self.game_display.blit(self.numjogp, self.calculator.rectangle_numjog)
 
                 pygame.display.flip()
                 if self.numjog <= 0:
                     print(self.numjog)
                     self.display_text.clear()
+                    pygame.draw.rect(self.game_display,(255,0,255),self.calculator.rectangle_numjog,0)
                     self.game_display.blit(self.perdeu, self.calculator.rectangle_resp)
                     pygame.display.flip()
                     time.sleep(0.55)

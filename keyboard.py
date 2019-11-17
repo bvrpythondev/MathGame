@@ -147,10 +147,8 @@ class Keyboard():
         for button in keyboard_buttons:
             if button.caption in self.list_active_buttons or button.caption in ['C', '=']:
                 button.visible = True
-                button.fgcolor = (0,255,0)
 
             else:
-                button.fgcolor = (255,0,0)
                 button.visible = False
 
 
