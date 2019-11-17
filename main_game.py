@@ -18,9 +18,9 @@ def main():
     game_display.fill(pygbutton.WHITE)
     # Define o nome da janela
     pygame.display.set_caption("Math Game")
-    cena1 = scene.Scene(game_display, 10, 4,['1', '9', '+','(',')'])
-    cena2 = scene.Scene(game_display, 100, 5,['1', '0', '5', '2', '*', '+'])
-    cena3 = scene.Scene(game_display, 40, 5,['2', '*', '0'])
+    cena1 = scene.Scene(game_display, 10, 3,['1', '9', '+','(',')'])
+    cena2 = scene.Scene(game_display, 100, 4,['1', '0', '5', '2', '*', '+'])
+    cena3 = scene.Scene(game_display, 40, 4,['2', '*', '0'])
     cenas = []
     cenas.append(cena1)
     cenas.append(cena2)

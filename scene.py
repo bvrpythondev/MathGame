@@ -22,9 +22,9 @@ class Scene():
         self.numjogi= numjog
         self.display_text = []
         self.result_text = False
-        self.correto = self.font2.render("Correto",True,(0,0,0))
-        self.incorreto = self.font2.render("Incorreto",True,(0,0,0))
-        self.perdeu = self.font2.render("Perdeu",True,(0,0,0))
+        self.correto = self.font2.render("Correto",True,(255,255,255))
+        self.incorreto = self.font2.render("Incorreto",True,(255,255,255))
+        self.perdeu = self.font2.render("Perdeu",True,(255,255,255))
 
     def gamewin(self):
         self.game_display.fill((255,255,255))
@@ -33,9 +33,9 @@ class Scene():
         "Desenha a fase"
         self.calculator.draw_keyboard()
         alvo =self.font2.render(str('Alvo = '+str(self.alvo)),True,(255,255,255))
-        self.game_display.blit(alvo,(10,430))
-        self.numjogp = self.font2.render(str("Número clicks = " + str(self.numjog)), True, (0, 0, 0))
-        self.game_display.blit(self.numjogp, self.calculator.rectangle_numjog)
+        self.game_display.blit(alvo,self.calculator.rectangle_alvo)
+        self.numjogp = self.font2.render(str("Clicks = " + str(self.numjog)), True, (255, 255, 255))
+        self.game_display.blit(self.numjogp, self.calculator.rectangle_numjog )
 
     def handle_events(self, event):
         """Cuida dos eventos da fase"""
@@ -64,11 +64,10 @@ class Scene():
             else:
                 self.display_text.append(button_pressed)
                 self.numjog -= 1
-                self.numjogp = self.font2.render("Número jogadas"+str(self.numjog), True, (0, 0, 0))
-                self.game_display.blit(self.numjogp, self.calculator.rectangle_numjog)
+                self.game_display.blit(self.numjogp, (250,190))
 
                 pygame.display.flip()
-                if self.numjog <= 0:
+                if self.numjog < 0:
                     print(self.numjog)
                     self.display_text.clear()
                     pygame.draw.rect(self.game_display,(255,0,255),self.calculator.rectangle_numjog,0)

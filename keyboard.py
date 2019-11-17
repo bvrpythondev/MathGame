@@ -146,10 +146,9 @@ class Keyboard():
 
         for button in keyboard_buttons:
             if button.caption in self.list_active_buttons or button.caption in ['C', '=']:
-                button.visible = True
-
+                button.fgcolor = (0,0,200)
             else:
-                button.visible = False
+                button.fgcolor = (190,0,0)
 
 
 
@@ -162,12 +161,21 @@ class Keyboard():
                          self.calculator_display_rect)
         for button in self.buttons:
             button.draw(self.gamedisplay)
-        pygame.draw.rect(self.gamedisplay,(255,0,0),self.rectangle_alvo)
-        pygame.draw.rect(self.gamedisplay,(255,255,0),self.rectangle_resp)
-        pygame.draw.rect(self.gamedisplay,(255,0,255),self.rectangle_numjog)
+        pygame.draw.rect(self.gamedisplay,(0,0,190),self.rectangle_alvo)
+        pygame.draw.rect(self.gamedisplay,(150,75,0),self.rectangle_resp)
+        pygame.draw.rect(self.gamedisplay,(0,200,0),self.rectangle_numjog)
     def use_keyboard(self, event):
         """Checa se algum botão foi pressionado"""
+        buttos2 = []
         for button in self.buttons:
-            if 'click' in button.handle_event(event):
-                return button.caption
+            for caption in button.caption:
+                for button_active in self.list_active_buttons:
+                    if button_active == caption:
+                        buttos2.append(button)
+                    elif caption == "=" or caption == 'C':
+                        buttos2.append(button)
+
+            for button_usuable in buttos2:
+                if 'click' in button_usuable.handle_event(event):
+                    return button.caption
         return None
