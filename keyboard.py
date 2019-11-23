@@ -29,9 +29,10 @@ class Keyboard():
             self.list_active_buttons = list_active_buttons
     
         self.buttons = self._create_buttons()
-        self.calculator_display_rect = pygame.Rect(0, 0, 600, 150)
+        self.calculator_display_rect = pygame.Rect(0, 0, 600, 120)
         self.calculator_display_color = (0, 0, 0)
         self.gamedisplay = gamedisplay
+        self.slategray = (71,82,92)
 
         self.rectangle_alvo = pygame.Rect(0, 410, 200, 190)
         self.rectangle_resp = pygame.Rect(160, 410, 200, 190)
@@ -146,9 +147,13 @@ class Keyboard():
 
         for button in keyboard_buttons:
             if button.caption in self.list_active_buttons or button.caption in ['C', '=']:
-                button.fgcolor = (0,0,200)
+                button.fgcolor = (255,255,255)
+                button.bgcolor =(102,102,102)
+                button.font = pygame.font.Font('OdibeeSans-Regular.ttf',30)
+                button.visible = True
             else:
-                button.fgcolor = (190,0,0)
+                button.fgcolor = (0,0,0)
+                button.visible = False
 
 
 
@@ -161,21 +166,12 @@ class Keyboard():
                          self.calculator_display_rect)
         for button in self.buttons:
             button.draw(self.gamedisplay)
-        pygame.draw.rect(self.gamedisplay,(0,0,190),self.rectangle_alvo)
-        pygame.draw.rect(self.gamedisplay,(150,75,0),self.rectangle_resp)
-        pygame.draw.rect(self.gamedisplay,(0,200,0),self.rectangle_numjog)
+        pygame.draw.rect(self.gamedisplay,self.slategray,self.rectangle_alvo)
+        pygame.draw.rect(self.gamedisplay,self.slategray,self.rectangle_resp)
+        pygame.draw.rect(self.gamedisplay,self.slategray,self.rectangle_numjog)
     def use_keyboard(self, event):
         """Checa se algum botão foi pressionado"""
-        buttos2 = []
         for button in self.buttons:
-            for caption in button.caption:
-                for button_active in self.list_active_buttons:
-                    if button_active == caption:
-                        buttos2.append(button)
-                    elif caption == "=" or caption == 'C':
-                        buttos2.append(button)
-
-            for button_usuable in buttos2:
-                if 'click' in button_usuable.handle_event(event):
-                    return button.caption
+            if 'click' in button.handle_event(event):
+                return button.caption
         return None

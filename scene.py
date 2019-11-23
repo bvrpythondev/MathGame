@@ -16,19 +16,16 @@ class Scene():
             self.teclas = teclas
         self.calculator = keyboard.Keyboard(self.game_display, self.teclas)
         self.alvo = alvo
-        self.font = pygame.font.SysFont('helvetica', 50)
-        self.font2 = pygame.font.SysFont('helvetica', 30)
+        self.font = pygame.font.Font('OdibeeSans-Regular.ttf',50)
+        self.font2 = pygame.font.Font('Poppins-Light.ttf',30)
         self.numjog = numjog
         self.numjogi= numjog
         self.display_text = []
-        self.result_text = False
         self.correto = self.font2.render("Correto",True,(255,255,255))
         self.incorreto = self.font2.render("Incorreto",True,(255,255,255))
         self.perdeu = self.font2.render("Perdeu",True,(255,255,255))
 
-    def gamewin(self):
-        self.game_display.fill((255,255,255))
-        pygame.display.flip()
+
     def build_scene(self):
         "Desenha a fase"
         self.calculator.draw_keyboard()
@@ -50,13 +47,11 @@ class Scene():
                 valor = self.evaluate()
                 self.display_text.clear()
                 if valor == self.alvo:
-                    self.result_text = True
                     self.game_display.blit(self.correto,self.calculator.rectangle_resp)
                     pygame.display.flip()
                     time.sleep(1)
                     return 1
                 else:
-                    self.result_text = False
                     self.game_display.blit(self.incorreto, self.calculator.rectangle_resp)
                     pygame.display.flip()
                     time.sleep(1)
@@ -64,7 +59,6 @@ class Scene():
             else:
                 self.display_text.append(button_pressed)
                 self.numjog -= 1
-                self.game_display.blit(self.numjogp, (250,190))
 
                 pygame.display.flip()
                 if self.numjog < 0:

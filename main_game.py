@@ -16,6 +16,8 @@ def main():
     game_display = pygame.display.set_mode((600, 500))
     # Preenche o fundo da tela com a cor branca
     game_display.fill(pygbutton.WHITE)
+    backgroundimage = pygame.image.load('mat5.jpg')
+    backgroundimage = pygame.transform.scale(backgroundimage,(600, 500))
     # Define o nome da janela
     pygame.display.set_caption("Math Game")
     cena1 = scene.Scene(game_display, 10, 3,['1', '9', '+','(',')'])
@@ -47,6 +49,7 @@ def main():
         # Preenche a tela de branco
         try:
             game_display.fill(pygbutton.WHITE)
+            game_display.blit(backgroundimage,[0,0])
             cenas[fase].build_scene()
             cenas[fase].write_calculator()
         except:
