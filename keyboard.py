@@ -57,7 +57,7 @@ class Keyboard():
                                                      GRID_HEIGHT_MIN + 2 * GRID_HEIGHT_INTERVAL,
                                                      WIDTH_BUTTONS,
                                                      HEIGHT_BUTTON_NUM),
-                                                    "*"))
+                                                    "x"))
         keyboard_buttons.append(pygbutton.PygButton((GRID_WIDTH_MIN,
                                                      GRID_HEIGHT_MIN + 3 * GRID_HEIGHT_INTERVAL,
                                                      WIDTH_BUTTONS,

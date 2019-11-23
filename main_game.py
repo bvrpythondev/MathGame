@@ -21,8 +21,8 @@ def main():
     # Define o nome da janela
     pygame.display.set_caption("Math Game")
     cena1 = scene.Scene(game_display, 10, 3,['1', '9', '+','(',')'])
-    cena2 = scene.Scene(game_display, 100, 4,['1', '0', '5', '2', '*', '+'])
-    cena3 = scene.Scene(game_display, 40, 4,['2', '*', '0'])
+    cena2 = scene.Scene(game_display, 100, 4,['1', '0', '5', '2', 'x', '+'])
+    cena3 = scene.Scene(game_display, 40, 4,['2', 'x', '0'])
     cenas = []
     cenas.append(cena1)
     cenas.append(cena2)

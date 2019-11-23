@@ -57,7 +57,10 @@ class Scene():
                     time.sleep(1)
                     return 0
             else:
-                self.display_text.append(button_pressed)
+                if button_pressed == 'x':
+                    self.display_text.append('*')
+                else:
+                    self.display_text.append(button_pressed)
                 self.numjog -= 1
 
                 pygame.display.flip()
