@@ -20,13 +20,19 @@ def main():
     backgroundimage = pygame.transform.scale(backgroundimage,(600, 500))
     # Define o nome da janela
     pygame.display.set_caption("Math Game")
-    cena1 = scene.Scene(game_display, 10, 3,['1', '9', '+','(',')'])
-    cena2 = scene.Scene(game_display, 100, 4,['1', '0', '5', '2', 'x', '+'])
-    cena3 = scene.Scene(game_display, 40, 4,['2', 'x', '0'])
+    cena1 = scene.Scene(game_display, 15, 7,['2', '3', '4','+','x'])#Solução = 2 * 4 +4 +3
+    cena2 = scene.Scene(game_display, 26, 9,['2', '5', '4','+','x','(',')'])
+    cena3 = scene.Scene(game_display, 59, 9,['2', '4', '6', '7', 'x', '+','/'])
+    cena4 = scene.Scene(game_display, 156, 6,['7', '8','6','3','x','/'])
+    cena5 = scene.Scene(game_display, 61, 15,["(", ")", "1", "2", "4", "5", "6", "9",".","+", "x", "/"])
+    cena6 = scene.Scene(game_display, 63, 12,['1', '2','5','3','x','-','/','+','x','(',')'])
     cenas = []
     cenas.append(cena1)
     cenas.append(cena2)
     cenas.append(cena3)
+    cenas.append(cena4)
+    cenas.append(cena5)
+    cenas.append(cena6)
     gamewin = endgame.GameWin(game_display)
     # loop principal do game
     fase = 0
