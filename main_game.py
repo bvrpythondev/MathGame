@@ -46,10 +46,6 @@ def main():
                 quit()
             if event.type in (pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP):
                 proxima_fase += cenas[fase].handle_events(event)
-
-
-
-
         if proxima_fase > fase:
             fase = proxima_fase
 
