@@ -16,8 +16,9 @@ def main():
     game_display = pygame.display.set_mode((600, 500))
     # Preenche o fundo da tela com a cor branca
     game_display.fill(pygbutton.WHITE)
-    backgroundimage = pygame.image.load('mat5.jpg')
-    backgroundimage = pygame.transform.scale(backgroundimage,(600, 500))
+    backgroundimage = pygame.image.load('mat5 - copia.jpg')
+    music_win = pygame.mixer.music.load('gamewining.mp3')
+    # backgroundimage = pygame.transform.scale(backgroundimage,(600, 500))
     # Define o nome da janela
     pygame.display.set_caption("Math Game")
     cena1 = scene.Scene(game_display, 15, 7,['2', '3', '4','+','x'])#Solução = 2 * 4 +4 +3
@@ -33,7 +34,7 @@ def main():
     cenas.append(cena4)
     cenas.append(cena5)
     cenas.append(cena6)
-    gamewin = endgame.GameWin(game_display)
+    gamewin = endgame.GameWin(game_display, music_win)
     # loop principal do game
     fase = 0
     proxima_fase = 0
@@ -55,11 +56,15 @@ def main():
         # Preenche a tela de branco
         try:
             game_display.fill(pygbutton.WHITE)
-            game_display.blit(backgroundimage,[0,0])
+            game_display.blit(backgroundimage, [0,0])
             cenas[fase].build_scene()
             cenas[fase].write_calculator()
         except:
             gamewin.gamewin()
+            time.sleep(5)
+            fase = 0
+            proxima_fase = 0
+            
         # Atualiza a tela
         pygame.display.flip()
 main()
