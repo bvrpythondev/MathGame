@@ -29,11 +29,11 @@ def main():
     cena6 = scene.Scene(game_display, 63, 12,['1', '2','5','3','x','-','/','+','x','(',')'])
     cenas = []
     cenas.append(cena1)
-    cenas.append(cena2)
-    cenas.append(cena3)
-    cenas.append(cena4)
-    cenas.append(cena5)
-    cenas.append(cena6)
+    # cenas.append(cena2)
+    # cenas.append(cena3)
+    # cenas.append(cena4)
+    # cenas.append(cena5)
+    # cenas.append(cena6)
     gamewin = endgame.GameWin(game_display, music_win)
     # loop principal do game
     fase = 0
