@@ -56,6 +56,7 @@ class Scene():
                     self.game_display.blit(self.incorreto, self.calculator.rectangle_resp)
                     pygame.display.flip()
                     time.sleep(1.5)
+                    time.sleep(1)
                     self.numjog = self.numjogi
                     return 0
             else:
