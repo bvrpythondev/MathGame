@@ -147,7 +147,7 @@ class Keyboard():
 
         for button in keyboard_buttons:
             if button.caption in self.list_active_buttons or button.caption in ['C', '=']:
-                button.fgcolor = (255,255,255)
+                button.fgcolor = (0,0,0)
                 button.bgcolor =(102,102,102)
                 button.font = pygame.font.Font('OdibeeSans-Regular.ttf',30)
                 button.visible = True

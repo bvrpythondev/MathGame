@@ -2,18 +2,21 @@ import pygame
 import sys
 import pygbutton
 import time
+import GIFImage
 
 class GameWin(object):
     def __init__(self,gamedisplay, music):
         self.font = pygame.font.SysFont('helvetica', 35)
         self.music = music
         self.gamedisplay = gamedisplay
-
+        self.winnerAnimation = GIFImage.GIFImage('win.gif')
     def gamewin(self):
-        self.gamedisplay.fill((0, 200, 0))
-        winner_image = pygame.image.load('winner.png')
-        winner_image = pygame.transform.scale(winner_image,(300,300))
-        self.gamedisplay.blit(winner_image,(150,80))
+        self.gamedisplay.fill((183, 232, 255))
+        for i in range(15):
+            self.winnerAnimation.play()
+            self.winnerAnimation.render(self.gamedisplay, (0,0))
+            time.sleep(0.1)
+            pygame.display.flip()
         pygame.mixer.music.play()
         pygame.display.flip()
 

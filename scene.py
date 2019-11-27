@@ -3,6 +3,9 @@ import pygame
 import time
 import keyboard
 import endgame
+import GIFImage
+
+
 
 class Scene():
     """Classe que define e cria métodos para a tela do jogo"""
@@ -25,6 +28,10 @@ class Scene():
         self.correto = self.font2.render("Correto", True, (0, 0, 0))
         self.incorreto = self.font2.render("Incorreto", True, (0, 0, 0))
         self.perdeu = self.font2.render("Perdeu", True, (0, 0, 0))
+        self.animation = GIFImage.GIFImage('girafa.gif')
+        self.perdeuAnimation = GIFImage.GIFImage('incorreto.gif')
+
+
 
     def build_scene(self):
         "Desenha a fase"
@@ -47,16 +54,26 @@ class Scene():
                 valor = self.evaluate()
                 self.display_text.clear()
                 if valor == self.alvo:
-                    self.game_display.blit(self.correto, self.calculator.rectangle_resp)
+                    for  i in range(15):
+                        self.animation.play()
+                        self.animation.render(self.game_display,self.calculator.rectangle_resp)
+                        time.sleep(0.1)
+                        pygame.display.flip()
+
+                        # self.game_display.blit(self.correto, self.calculator.rectangle_resp)
                     pygame.display.flip()
-                    time.sleep(1)
+                    time.sleep(0.7)
                     self.numjog = self.numjogi
                     return 1
                 else:
+                    for  i in range(15):
+                        self.perdeuAnimation.play()
+                        self.perdeuAnimation.render(self.game_display,self.calculator.rectangle_resp)
+                        time.sleep(0.1)
+                        pygame.display.flip()
                     self.game_display.blit(self.incorreto, self.calculator.rectangle_resp)
-                    pygame.display.flip()
-                    time.sleep(1.5)
-                    time.sleep(1)
+                    #pygame.display.flip()
+                    time.sleep(0.7)
                     self.numjog = self.numjogi
                     return 0
             else:
@@ -76,7 +93,11 @@ class Scene():
                                      self.calculator.rectangle_numjog,
                                      0)
                     self.game_display.blit(self.perdeu, self.calculator.rectangle_numjog)
-                    pygame.display.flip()
+                    for i in range(15):
+                        self.perdeuAnimation.play()
+                        self.perdeuAnimation.render(self.game_display, self.calculator.rectangle_resp)
+                        time.sleep(0.1)
+                        pygame.display.flip()
                     time.sleep(1.5)
                     self.numjog = self.numjogi
                     return 0
